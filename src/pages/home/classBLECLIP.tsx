@@ -1,5 +1,10 @@
 export class BLECLIP {
-  public constructor() {}
+  public writeDatatoCLIP?: BluetoothRemoteGATTCharacteristic;
+  public isWriteDatatoCLIP: boolean;
+
+  public constructor() {
+    this.isWriteDatatoCLIP = false;
+  }
 
   public connectToBLE(): void {
     if (!navigator.bluetooth) {
@@ -25,6 +30,9 @@ export class BLECLIP {
         );
       })
       .then((characteristic) => {
+        this.writeDatatoCLIP = characteristic;
+        this.isWriteDatatoCLIP = true;
+        console.log("ok");
         const myCharacteristic = characteristic;
         return myCharacteristic
           ?.startNotifications()
@@ -40,6 +48,21 @@ export class BLECLIP {
       })
       .catch((error) => {
         console.log(error);
+      });
+  }
+
+  public requestToBLE(): void {
+    if (!this.isWriteDatatoCLIP) {
+      return;
+    }
+    const encoder = new TextEncoder();
+    this.writeDatatoCLIP
+      ?.writeValue(encoder.encode("Hello"))
+      .then((_: any) => {
+        console.log("Dikirim");
+      })
+      .catch((e) => {
+        console.log(e);
       });
   }
 

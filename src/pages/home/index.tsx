@@ -12,6 +12,7 @@ const Home = () => {
           bisa buat folder di pages
         </Text>
         <Button onClick={() => clipDevice.connectToBLE()}> Connect </Button>
+        <Button onClick={() => clipDevice.requestToBLE()}> Write </Button>
       </Stack>
     </>
   );
