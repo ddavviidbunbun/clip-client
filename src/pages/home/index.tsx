@@ -1,6 +1,8 @@
-import { Stack, Text } from "@chakra-ui/react";
+import { Stack, Text, Button } from "@chakra-ui/react";
+import { BLECLIP } from "./classBLECLIP";
 
 const Home = () => {
+  const clipDevice = new BLECLIP();
   return (
     <>
       <Stack minW={"100vw"} h={"100px"} bgColor={"orange.300"}>
@@ -9,7 +11,11 @@ const Home = () => {
           bisa buat folder di pages
         </Text>
         <Button onClick={() => clipDevice.connectToBLE()}> Connect </Button>
-        <Button onClick={() => clipDevice.requestToBLE()}> Write </Button>
+        <Button onClick={() => clipDevice.requestToBLE("WRITE#Nama_CLIP")}>
+          {" "}
+          Write{" "}
+        </Button>
+        <Text>{clipDevice.getIMEI()}</Text>
       </Stack>
     </>
   );
