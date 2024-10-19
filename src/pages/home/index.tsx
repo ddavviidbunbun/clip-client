@@ -8,6 +8,8 @@ const Home = () => {
           Ini adalah home pages, ini bisa dimainin gaes atau kalau mau buat baru
           bisa buat folder di pages
         </Text>
+        <Button onClick={() => clipDevice.connectToBLE()}> Connect </Button>
+        <Button onClick={() => clipDevice.requestToBLE()}> Write </Button>
       </Stack>
     </>
   );
