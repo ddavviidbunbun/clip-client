@@ -1,7 +1,6 @@
 export class BLECLIP {
   private writeDatatoCLIP?: BluetoothRemoteGATTCharacteristic;
   private isREQDatatoCLIP: boolean;
-  private isOpen: boolean = false;
   private clipIMEI: string = "KOSONG";
 
   private serviceUID: BluetoothServiceUUID =
@@ -98,8 +97,8 @@ export class BLECLIP {
       case "OPEN":
         this.clipIMEI = arr[1];
         break;
-
       default:
+        console.log(res);
         break;
     }
     return res;
