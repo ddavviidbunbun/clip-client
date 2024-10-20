@@ -35,7 +35,6 @@ export class BLECLIP {
         this.writeDatatoCLIP = characteristic;
         this.isREQDatatoCLIP = true;
         console.log("ok");
-        this.requestToBLE("OPEN");
         const myCharacteristic = characteristic;
         return myCharacteristic
           ?.startNotifications()
@@ -48,6 +47,9 @@ export class BLECLIP {
           .catch((err: any) => {
             console.log(err);
           });
+      })
+      .then((_: any) => {
+        this.requestToBLE("OPEN");
       })
       .catch((error) => {
         console.log(error);
@@ -79,6 +81,7 @@ export class BLECLIP {
     this.writeDatatoCLIP
       ?.writeValue(encoder.encode(msg))
       .then((_: any) => {
+        console.log(msg);
         console.log("Dikirim");
       })
       .catch((e) => {
@@ -96,6 +99,7 @@ export class BLECLIP {
     switch (arr[0]) {
       case "OPEN":
         this.clipIMEI = arr[1];
+        console.log(this.clipIMEI);
         break;
       default:
         console.log(res);
