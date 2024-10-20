@@ -89,23 +89,21 @@ export class BLECLIP {
       });
   }
 
-  private responseFromBLE(e: any): string {
-    let res = "";
-    for (let i = 0; i < 20; i++) {
-      res += String.fromCharCode(e.target.value.getUint8(i));
-    }
-    console.log(`val = ${res}`);
-    const arr = res.split("#");
+  private responseFromBLE(e: any): any {
+    const res = e.target.value;
+    const decode = new TextDecoder();
+    const resDecode = decode.decode(res);
+    const arr = resDecode.split("#");
     switch (arr[0]) {
       case "OPEN":
         this.clipIMEI = arr[1];
-        console.log(this.clipIMEI);
+        console.log(`clip IMEI = ${this.clipIMEI}`);
         break;
       default:
         console.log(res);
         break;
     }
-    return res;
+    return resDecode;
   }
 
   public getIMEI() {
